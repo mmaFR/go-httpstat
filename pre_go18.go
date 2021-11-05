@@ -1,3 +1,4 @@
+//go:build !go1.8
 // +build !go1.8
 
 package httpstat
@@ -21,6 +22,7 @@ func (r *Result) End(t time.Time) {
 	}
 
 	r.contentTransfer = r.t5.Sub(r.t4)
+	r.contentTransferSet = true
 	r.total = r.t5.Sub(r.t0)
 }
 
@@ -29,6 +31,14 @@ func (r *Result) End(t time.Time) {
 // be time after read body (go-httpstat can not detect that time).
 func (r *Result) ContentTransfer(t time.Time) time.Duration {
 	return t.Sub(r.t4)
+}
+
+func (r *Result) GetContentTransferDuration() time.Duration {
+	if r.contentTransferSet {
+		return r.contentTransfer
+	} else {
+		return time.Duration(-1)
+	}
 }
 
 // Total returns the duration of total http request.
