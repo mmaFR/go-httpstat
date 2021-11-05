@@ -23,6 +23,7 @@ func (r *Result) End(t time.Time) {
 
 	r.contentTransfer = r.t5.Sub(r.t4)
 	r.contentTransferSet = true
+
 	r.total = r.t5.Sub(r.t0)
 }
 
