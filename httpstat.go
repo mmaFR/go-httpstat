@@ -14,11 +14,12 @@ import (
 // Result stores httpstat info.
 type Result struct {
 	// The following are duration for each phase
-	DNSLookup        time.Duration
-	TCPConnection    time.Duration
-	TLSHandshake     time.Duration
-	ServerProcessing time.Duration
-	contentTransfer  time.Duration
+	DNSLookup          time.Duration
+	TCPConnection      time.Duration
+	TLSHandshake       time.Duration
+	ServerProcessing   time.Duration
+	contentTransfer    time.Duration
+	contentTransferSet bool
 
 	// The followings are timeline of request
 	NameLookup    time.Duration
